@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no,maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="banner">
+    <div class='image'><img width="3000" height="250" src="./img/bg.png"></div>
+    <div class='image'><img width="1800" height="165" src="./img/girl1.png"></div>
+    <div class='image'><img width="3000" height="250" src="./img/grassland.png"></div>
+    <div class='image'><img width="1800" height="160" src="./img/mushroom.png"></div>
+    <div class='image'><img width="1800" height="165" src="./img/spirit.png"></div>
+    <div class='image'><img width="1950" height="178" src="./img/leaf.png"></div>
+  </div>
+
+  <script type="text/javascript">
+    let banner = document.querySelector('.banner');
+    let images =  document.querySelectorAll('.image');
+    let x = 0
+    let x_new = 0
+    let x_offset = 0
+
+    let window_width = document.documentElement.clientWidth
+    let setp = window_width /2 /2  // 鼠标移动  setp像素，模糊度 +/- 1
+    // console.log(setp);
+
+    // x轴 和模糊度
+    let data_images = [
+      { x:0, b: 6},
+      { x:0, b: 0},
+      { x:0, b: 4},
+      { x:0, b: 5},
+      { x:0, b: 3},
+      { x:0, b: 4}
+    ]
+
+    let init = () => {
+      // image[0].children[0].style = 'transform: translate(0px); filter: blur(6px);'
+      // image[1].children[0].style = 'transform: translate(0px); filter: blur(0px);'
+      // image[2].children[0].style = 'transform: translate(0px); filter: blur(4px);'
+      // image[3].children[0].style = 'transform: translate(0px); filter: blur(6px);'
+      // image[4].children[0].style = 'transform: translate(0px); filter: blur(1px);'
+      // image[5].children[0].style = 'transform: translate(0px); filter: blur(6px);'
+      for (const key in images) {
+        const element = images[key];
+        const element_data = data_images[key]
+        element.children[0].style = `transition: .2s linear;transform: translate(${element_data.x}px); filter: blur(${element_data.b}px);`
+      }
+    }
+
+    // 鼠标移入改变x轴距离
+    banner.addEventListener('mouseover', (e) => {
+      x = e.clientX
+    })
+    // 鼠标移动
+    banner.addEventListener('mousemove', (e) => {
+      x_new = e.clientX
+      // console.log(x_new);
+      x_offset = x - x_new
+      // console.log(x_offset);
+
+      for (const key in images) {
+        const element = images[key];
+        const element_data = data_images[key]
+        // 新的虚化值
+        let b_new = Math.abs(element_data.b + (x_offset / setp))
+        element.children[0].style = `transform: translate(${element_data.x}px); filter: blur(${b_new}px);`
+      }
+    })
+    banner.addEventListener('mouseout', (e) => {
+      init()
+    })
+
+    let bink_index = 1
+    let time = 0
+    let bink = () => {
+      console.log('222');
+      if (bink_index === 4) {
+        bink_index = 1
+        time = 4000
+      } else {
+        bink_index += 1
+        time = 100
+      }
+      images[1].children[0].src = `./img/girl${bink_index}.png`
+
+     setTimeout(() => {
+      bink()
+     }, time);
+    }
+
+    window.onload = () => {
+      init()
+      bink()
+    }
+  </script>
+</body>
+</html>

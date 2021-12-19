@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no,maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+  <div class="shell">
+    <div class="shell-top">
+      <ul class="main">
+        <li>
+          <img src="./image/1.png" alt="">
+          <div class="box-one"></div>
+          <div class="box-two"></div>
+          <div class="box-one"></div>
+        </li>
+        <li>
+          <img src="./image/2.png" alt="">
+          <div class="box-one"></div>
+          <div class="box-two"></div>
+          <div class="box-one"></div>
+        </li>
+        <li>
+          <img src="./image/3.png" alt="">
+          <div class="box-one"></div>
+          <div class="box-two"></div>
+          <div class="box-one"></div>
+        </li>
+      </ul>
+    </div>
+    <ul class="shell-bottom">
+      <li class="list"><img src="./image/1.png" alt=""></li>
+      <li class="list"><img src="./image/2.png" alt=""></li>
+      <li class="list"><img src="./image/3.png" alt=""></li>
+    </ul>
+  </div>
+
+  <script type="text/javascript">
+    let list =  document.querySelectorAll('.list');
+    let main = document.querySelector('.main');
+    for (let i = 0; i < list.length; i++) {
+      list[i].addEventListener('click', () => {
+        main.style.left = (i * -100) + '%'
+        console.log(i);
+        if (i) {
+          i === 1 ? document.body.style.backgroundColor='rgb(177, 152, 178)' : document.body.style.backgroundColor='rgb(46, 123, 117)'
+        } else {
+          document.body.style.backgroundColor='rgb(122, 111, 156)'
+        }
+      })
+    }
+  </script>
+</body>
+</html>
