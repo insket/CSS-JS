@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0,user-scalable=no,maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <div class="bt">pls click me</div>
+
+  <script type="text/javascript">
+    const bt = document.querySelector('.bt');
+
+    bt.addEventListener('click', (e) => {
+      // 获取按钮 的偏移量 left 和 top
+      let offsetLeft = e.target.offsetLeft
+      let offsetTop = e.target.offsetTop
+
+      if (e.target.nodeName === 'SPAN') {
+        // 如果点击了span元素, 则获取span的上级父元素div的offset偏移量
+        offsetLeft = e.target.offsetParent.offsetLeft
+        offsetTop = e.target.offsetParent.offsetTop
+      }
+
+      // 获取span的坐标
+      let x = e.clientX - offsetLeft
+      let y = e.clientY - offsetTop
+
+      // console.log(x, y);
+
+      // 定义 span
+      let ripple = document.createElement('span')
+      ripple.style.left = x + 'px'
+      ripple.style.top = y + 'px'
+      // 添加子元素
+      bt.appendChild(ripple)
+
+      // 一段时间后清除span 避免span越来越多
+      setTimeout(() => {
+        ripple.remove()
+      },800);
+    })
+  </script>
+</body>
+
+</html>
