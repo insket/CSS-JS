@@ -1,0 +1,53 @@
+*{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   text-decoration: none;
+   list-style: none;
+}
+
+body{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2C3D50;
+}
+
+.bt {
+  font-size: 24px;
+  color: #fff;
+  /* 文本大写 */
+  text-transform: uppercase;
+  border: 4px solid;
+  padding: 12px 24px;
+  position: relative;
+}
+
+.bt::before, .bt::after{
+  content: '';
+  position: absolute;
+  background-color: #2C3D50;
+  width: 12px;
+  height: 4px;
+  /* 定义了倾斜角度  */
+  transform: skew(-30deg);
+  transition: all .2s;
+}
+
+.bt::before{
+  top: -4px;
+  left: 20%;
+}
+.bt::after{
+  bottom: -4px;
+  right: 20%;
+}
+
+.bt:hover::before{
+  left: 80%;
+}
+.bt:hover::after{
+  right: 80%;
+}
